@@ -2,7 +2,7 @@
 // Breaking up card into components to allow update on hook array updates.
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getSets, setArrDistance, cmpSets } from '../../helpers/data/setData';
+import { getSets, setArrDistance, cmpSets } from '../../helpers/data/setData.js';
 
 const GroupCardDiv = ({
   id,

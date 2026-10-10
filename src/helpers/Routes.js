@@ -1,98 +1,76 @@
 // Routes.js
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Home from '../views/Home';
-import NotFound from '../views/NotFound';
-import WorkoutsView from '../views/WorkoutsView';
-import SharedWorkoutsView from '../views/SharedWorkoutsView';
-import WorkoutForm from '../components/forms/WorkoutForm';
-import CollectionsView from '../views/CollectionsView';
-import CollectionWorkoutsView from '../views/CollectionWorkoutsView';
-import CollectionForm from '../components/forms/CollectionForm';
-import UserForm from '../components/forms/UserForm';
+import Home from '../views/Home.js';
+import NotFound from '../views/NotFound.js';
+// import WorkoutsView from '../views/WorkoutsView.js';
+import SharedWorkoutsView from '../views/SharedWorkoutsView.js';
+// import WorkoutForm from '../components/forms/WorkoutForm.js';
+import CollectionsView from '../views/CollectionsView.js';
+import CollectionWorkoutsView from '../views/CollectionWorkoutsView.js';
+import CollectionForm from '../components/forms/CollectionForm.js';
+// import UserForm from '../components/forms/UserForm.js';
+import ProtectedRoute from './auth/ProtectedRoute.js';
+import WorkoutForm from '../components/forms/WorkoutForm.js';
+import UserForm from '../components/forms/UserForm.js';
+import WorkoutsView from '../views/WorkoutsView.js';
 
-const AuthedRoute = ({ component: Component, user, ...rest }) => {
-  const routeChecker = (values) => (user
-    ? (<Component {...values} user={user} />)
-    : (<Redirect to={{ pathname: '/not-found', state: { from: values.location } }} />));
-  return <Route {...rest} render={(props) => routeChecker(props)} />;
-};
-
-AuthedRoute.propTypes = {
-  component: PropTypes.func,
-  user: PropTypes.any,
-};
-
-const Routes = ({
+const AppRoutes = ({
   user,
-  setUser,
   searchTerms
 }) => (
-  <div>
-    <Switch>
+  <Routes>
       <Route exact path='/'
-      component={() => <Home user={user}
-      searchTerms={searchTerms}/>} />
-      <AuthedRoute exact path='/collections'
-        user={user}
-        component={() => <CollectionsView
-          user={user} />}
+        element={() => <Home user={user}
+        searchTerms={searchTerms}/>}
       />
-      <AuthedRoute exact path='/edit-collection/:id'
-        user={user}
-        component={() => <CollectionForm
-          user={user} />}
+      <Route element={<ProtectedRoute user={user} />}>
+        <Route path='/collections'
+          element={<CollectionsView
+            user={user} />} />
+        </Route>
+        <Route path='/edit-collection/:id'
+          element={<CollectionForm
+            user={user} />} />
+        <Route path = '/collection-workouts/:id'
+          element={<CollectionWorkoutsView
+            user={user} />} />
+        <Route path = 'add-collection'
+          element={<CollectionForm
+            user={user} />} />
+        <Route path = '/edit-workout/:id'
+          element={<WorkoutForm
+            user={user} />} />
+        <Route path = '/add-workout'
+          element={<WorkoutForm
+            user={user} />} />
+        <Route path = '/account'
+          element={<UserForm
+            user={user} />} />
+      <Route path = '/workouts'
+        element={<WorkoutsView
+            user={user}
+            searchTerms={searchTerms} />}
       />
-      <AuthedRoute exact path='/collection-workouts/:id'
-        user={user}
-        component={() => <CollectionWorkoutsView
-          user={user} />}
-      />
-      <AuthedRoute exact path='/add-collection'
-        user={user}
-        component={() => <CollectionForm
-          user={user} />}
-      />
-      <Route exact path='/workouts'
-        user={user}
-        component={() => <WorkoutsView
+      <Route path='/shared-workouts'
+        element={<SharedWorkoutsView
           user={user}
           searchTerms={searchTerms} />}
-      />
-      <Route exact path='/shared-workouts'
-        user={user}
-        component={() => <SharedWorkoutsView
-          user={user}
-          searchTerms={searchTerms}/>}
-      />
-      <AuthedRoute exact path='/edit-workout/:id'
-        user={user}
-        component={() => <WorkoutForm
-          user={user} />}
-      />
-      <AuthedRoute exact path='/add-workout'
-        user={user}
-        component={() => <WorkoutForm
-          user={user} />}
-      />
-      <AuthedRoute exact path='/account'
-        user={user}
-        component={() => <UserForm
-          user={user}
-          setUser={setUser} />}
-      />
+        />
       <Route path='*'
-        component={NotFound}
+        element={NotFound}
       />
-    </Switch>
-  </div>
+  </Routes>
 );
 
-Routes.propTypes = {
+AppRoutes.propTypes = {
   user: PropTypes.any,
   setUser: PropTypes.func,
   searchTerms: PropTypes.string
 };
 
-export default Routes;
+export default AppRoutes;

@@ -4,26 +4,26 @@ import React, {
   useState, useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Form, FormGroup,
   Label, Input,
   Button,
 } from 'reactstrap';
-import GroupFormDiv from '../cards/GroupFormDiv';
+import GroupFormDiv from '../cards/GroupFormDiv.js';
 import {
   getSets, deleteSetND,
   updateSet, addSet
-} from '../../helpers/data/setData';
+} from '../../helpers/data/setData.js';
 import {
   getSingleWorkout, updateWorkout,
   addWorkout
-} from '../../helpers/data/workoutData';
+} from '../../helpers/data/workoutData.js';
 import {
   updateGroup, deleteGroupND,
   addGroup
-} from '../../helpers/data/groupData';
-import { addWorkoutCollection, deleteWorkoutCollection, getWorkoutCollectionsCheckedArr } from '../../helpers/data/workoutCollectionData';
+} from '../../helpers/data/groupData.js';
+import { addWorkoutCollection, deleteWorkoutCollection, getWorkoutCollectionsCheckedArr } from '../../helpers/data/workoutCollectionData.js';
 
 const WorkoutForm = ({
   user
@@ -44,7 +44,7 @@ const WorkoutForm = ({
   const [deletedSets, setDeletedSets] = useState([]);
   const [collectionsArr, setCollectionsArr] = useState([]);
   const [initialCollectionsArr, setInitialCollectionsArr] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -117,7 +117,7 @@ const WorkoutForm = ({
   };
 
   const handleCancelClick = () => {
-    history.push('/workouts');
+    navigate('/workouts');
   };
 
   const handleSubmit = ((e) => {
@@ -179,7 +179,7 @@ const WorkoutForm = ({
       }).then(() => {
         saveCollectionChoices();
         const submitHistory = () => {
-          history.push('/workouts');
+          navigate('/workouts');
         };
         // delay for Firebase writing
         setTimeout(submitHistory, 200);
@@ -212,7 +212,7 @@ const WorkoutForm = ({
         saveCollectionChoices(workoutObj.id);
       }).then(() => {
         const submitHistory = () => {
-          history.push('/workouts');
+          navigate('/workouts');
         };
         // delay for Firebase writing
         setTimeout(submitHistory, 500);

@@ -1,9 +1,9 @@
 // workoutCollectionData.js
 
 import axios from 'axios';
-import firebaseConfig from '../apiKeys';
-import { getSingleWorkout } from './workoutData';
-import { getCollections } from './collectionData';
+import firebaseConfig from '../apiKeys.js';
+import { getSingleWorkout } from './workoutData.js';
+import { getCollections } from './collectionData.js';
 
 const dbUrl = firebaseConfig.databaseURL;
 

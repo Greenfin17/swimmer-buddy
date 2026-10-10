@@ -4,6 +4,8 @@ package-lock.json
 dist/
 .firebase/
 .env
+eslintrc-temp
+package.jason.old
 
 # dependencies
 /node_modules

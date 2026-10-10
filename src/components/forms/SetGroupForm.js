@@ -6,9 +6,9 @@ import {
   FormGroup,
   Label, Input,
 } from 'reactstrap';
-import SetForm from './SetForm';
-import { getSingleGroup } from '../../helpers/data/groupData';
-import { getSets, cmpSets } from '../../helpers/data/setData';
+import SetForm from './SetForm.js';
+import { getSingleGroup } from '../../helpers/data/groupData.js';
+import { getSets, cmpSets } from '../../helpers/data/setData.js';
 
 const SetGroupForm = ({
   index,

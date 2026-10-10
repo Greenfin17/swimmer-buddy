@@ -1,7 +1,7 @@
-import firebase from 'firebase';
+import { signOut } from 'firebase/auth';
 
-const signOut = async () => {
-  await firebase.auth().signOut();
+const signOutApp = async (authInit) => {
+  await signOut(authInit);
 };
 
-export default signOut;
+export default signOutApp;

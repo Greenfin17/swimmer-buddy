@@ -1,7 +1,7 @@
 // groupData.js
 
 import axios from 'axios';
-import firebaseConfig from '../apiKeys';
+import firebaseConfig from '../apiKeys.js';
 
 const dbUrl = firebaseConfig.databaseURL;
 

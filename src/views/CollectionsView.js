@@ -1,22 +1,22 @@
 // CollectionsView.js
 
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Spinner } from 'reactstrap';
-import TitleBox from '../components/TitleBox';
-import CollectionCard from '../components/cards/CollectionCard';
-import { getCollections } from '../helpers/data/collectionData';
+import TitleBox from '../components/TitleBox.js';
+import CollectionCard from '../components/cards/CollectionCard.js';
+import { getCollections } from '../helpers/data/collectionData.js';
 
 const CollectionsView = ({
   user
 }) => {
   const [collectionArray, setCollectionArray] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleAddClick = () => {
-    history.push('/add-collection');
+    navigate('/add-collection');
   };
 
   useEffect(() => {

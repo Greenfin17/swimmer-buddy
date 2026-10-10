@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import {
   Form, FormGroup,
   Label, Input,
   Button
 } from 'reactstrap';
-import { updateUser } from '../../helpers/data/userData';
+import { updateUser } from '../../helpers/data/userData.js';
 
 const UserForm = ({
   user,
   setUser
 }) => {
   const [localUser, setLocalUser] = useState({});
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setLocalUser((prevState) => ({
@@ -26,13 +26,13 @@ const UserForm = ({
     if (user.id) {
       updateUser(user.id, localUser).then(() => {
         setUser(localUser);
-        history.push('/');
+        navigate('/');
       });
     }
   };
 
   const handleCancelClick = () => {
-    history.push('/');
+    navigate('/');
   };
 
   useEffect(() => {

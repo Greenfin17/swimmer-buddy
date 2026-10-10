@@ -2,24 +2,24 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Card, CardBody,
   CardTitle, Button
 } from 'reactstrap';
-import { deleteCollection } from '../../helpers/data/collectionData';
-import { deleteJoinND, getCollectionWorkoutJoins } from '../../helpers/data/workoutCollectionData';
+import { deleteCollection } from '../../helpers/data/collectionData.js';
+import { deleteJoinND, getCollectionWorkoutJoins } from '../../helpers/data/workoutCollectionData.js';
 
 const CollectionCard = ({
   user,
   collection,
   setCollectionArray
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
     if (collection && collection.id) {
-      history.push(`/edit-collection/${collection.id}`);
+      navigate(`/edit-collection/${collection.id}`);
     }
   };
 
@@ -32,14 +32,14 @@ const CollectionCard = ({
       });
       deleteCollection(user.uid, collection.id).then((respCollectionArr) => {
         setCollectionArray(respCollectionArr);
-        history.push('/collections');
+        navigate('/collections');
       });
     }
   };
 
   const handleCardClick = () => {
     if (collection && collection.id) {
-      history.push(`/collection-workouts/${collection.id}`);
+      navigate(`/collection-workouts/${collection.id}`);
     }
   };
 
