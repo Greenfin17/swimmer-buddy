@@ -1,15 +1,15 @@
 // CollectionWorkoutsView.js
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Button, Spinner
 } from 'reactstrap';
-import TitleBox from '../components/TitleBox';
-import WorkoutCard from '../components/cards/WorkoutCard';
-import { getCollectionWorkoutJoins } from '../helpers/data/workoutCollectionData';
-import { getSingleCollection } from '../helpers/data/collectionData';
+import TitleBox from '../components/TitleBox.js';
+import WorkoutCard from '../components/cards/WorkoutCard.js';
+import { getCollectionWorkoutJoins } from '../helpers/data/workoutCollectionData.js';
+import { getSingleCollection } from '../helpers/data/collectionData.js';
 
 const CollectionWorkoutsView = ({
   user,
@@ -17,13 +17,13 @@ const CollectionWorkoutsView = ({
   const [collectionWorkouts, setCollectionWorkouts] = useState([]);
   const [collection, setCollection] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [trigger, setTrigger] = useState(false);
 
   const { id } = useParams();
 
   const handleAddClick = () => {
-    history.push('/add-workout');
+    navigate('/add-workout');
   };
 
   useEffect(() => {

@@ -1,12 +1,16 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import signIn from '../../helpers/auth/signIn';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import signIn from '../../helpers/auth/signIn.js';
 
-const LoginButton = () => {
-  const history = useHistory();
+const LoginButton = ({
+  authInit,
+  provider
+}) => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    signIn();
-    history.push('/');
+    signIn(authInit, provider);
+    navigate('/');
   };
 
   return (
@@ -16,6 +20,11 @@ const LoginButton = () => {
       </button>
     </div>
   );
+};
+
+LoginButton.propTypes = {
+  authInit: PropTypes.object,
+  provider: PropTypes.object
 };
 
 export default LoginButton;

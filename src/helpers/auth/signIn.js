@@ -1,8 +1,13 @@
-import firebase from 'firebase';
+import { signInWithPopup } from 'firebase/auth';
 
-const signIn = async () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  await firebase.auth().signInWithPopup(provider);
+const signIn = async (authInit, provider) => {
+  signInWithPopup(authInit, provider)
+    .then((result) => {
+      console.warn(result.user);
+    })
+    .catch((error) => {
+      console.warn(error.message);
+    });
 };
 
 export default signIn;

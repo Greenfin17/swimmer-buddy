@@ -3,25 +3,25 @@
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
-import WorkoutCard from '../components/cards/WorkoutCard';
-import TitleBox from '../components/TitleBox';
-import { getPublicWorkouts, getUserWorkouts } from '../helpers/data/workoutData';
-import searchWorkouts from '../helpers/data/search';
+import WorkoutCard from '../components/cards/WorkoutCard.js';
+import TitleBox from '../components/TitleBox.js';
+import { getPublicWorkouts, getUserWorkouts } from '../helpers/data/workoutData.js';
+import searchWorkouts from '../helpers/data/search.js';
 
 const WorkoutsView = ({
   user,
   searchTerms,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [userWorkouts, setUserWorkouts] = useState([]);
   const [filterCopy, setFilterCopy] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [trigger, setTrigger] = useState(false);
 
   const handleAddClick = () => {
-    history.push('/add-workout');
+    navigate('/add-workout');
   };
 
   // run search when the search terms change, run when userWorkouts is loaded

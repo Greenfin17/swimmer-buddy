@@ -2,23 +2,23 @@
 // Display individual workout on a card
 
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Card, CardBody,
   CardTitle, CardSubtitle,
   Button, Input, Label, Spinner
 } from 'reactstrap';
-import { deleteGroupND, getGroups, cmpGroups } from '../../helpers/data/groupData';
-import GroupCardDiv from './GroupCardDiv';
-import { deleteSetND, getSets } from '../../helpers/data/setData';
-import { deleteWorkout, getSingleWorkout } from '../../helpers/data/workoutData';
+import { deleteGroupND, getGroups, cmpGroups } from '../../helpers/data/groupData.js';
+import GroupCardDiv from './GroupCardDiv.js';
+import { deleteSetND, getSets } from '../../helpers/data/setData.js';
+import { deleteWorkout, getSingleWorkout } from '../../helpers/data/workoutData.js';
 import {
   deleteJoinND, getWorkoutCollectionJoins,
   deleteWorkoutCollection, addWorkoutCollection,
   getWorkoutCollectionsCheckedArr
-} from '../../helpers/data/workoutCollectionData';
-import { getUser } from '../../helpers/data/userData';
+} from '../../helpers/data/workoutCollectionData.js';
+import { getUser } from '../../helpers/data/userData.js';
 
 const WorkoutCard = ({
   user,
@@ -36,11 +36,11 @@ const WorkoutCard = ({
   const [initialCollectionsArr, setInitialCollectionsArr] = useState([]);
   const [toggleAddCollections, setToggleAddCollections] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
     if (workout && workout.id) {
-      history.push(`/edit-workout/${workout.id}`);
+      navigate(`/edit-workout/${workout.id}`);
     }
   };
 

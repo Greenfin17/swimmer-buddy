@@ -13,12 +13,14 @@ import {
   DropdownMenu, DropdownItem,
   Input
 } from 'reactstrap';
-import LogoutButton from './buttons/LogoutButton';
-import LoginButton from './buttons/LoginButton';
+import LogoutButton from './buttons/LogoutButton.js';
+import LoginButton from './buttons/LoginButton.js';
 
 const NavBar = ({
   user,
-  setSearchTerms
+  setSearchTerms,
+  authInit,
+  provider
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputString, setInputString] = useState({
@@ -102,8 +104,11 @@ const NavBar = ({
               </div>
               }
             </Nav>
-            { !user && <LoginButton /> }
-            { user && <LogoutButton /> }
+            { !user && <LoginButton
+               authInit = {authInit}
+               provider = {provider}/> }
+            { user && <LogoutButton
+               authInit = {authInit} /> }
           </Collapse>
       </Navbar>
     </div>
@@ -112,7 +117,9 @@ const NavBar = ({
 
 NavBar.propTypes = {
   user: PropTypes.any,
-  setSearchTerms: PropTypes.func
+  setSearchTerms: PropTypes.func,
+  authInit: PropTypes.object,
+  provider: PropTypes.object
 };
 
 export default NavBar;

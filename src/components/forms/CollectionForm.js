@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import {
   Form, FormGroup,
@@ -13,7 +13,7 @@ import {
   getSingleCollection,
   addCollection,
   updateCollection
-} from '../../helpers/data/collectionData';
+} from '../../helpers/data/collectionData.js';
 
 const CollectionForm = ({
   user,
@@ -23,7 +23,7 @@ const CollectionForm = ({
     description: '',
     title: ''
   });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -35,17 +35,17 @@ const CollectionForm = ({
   };
 
   const handleCancelClick = () => {
-    history.push('/collections');
+    navigate('/collections');
   };
 
   const handleSubmit = () => {
     if (id) {
       updateCollection(id, collection).then(() => {
-        history.push('/collections');
+        navigate('/collections');
       });
     } else {
       addCollection(collection).then(() => {
-        history.push('/collections');
+        navigate('/collections');
       });
     }
   };

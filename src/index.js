@@ -1,20 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './styles/index.scss';
-import firebase from 'firebase';
-import firebaseConfig from './helpers/apiKeys';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import MainApp from './App/appIndex.js';
+import reportWebVitals from './reportWebVitals.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-firebase.initializeApp(firebaseConfig);
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-ReactDOM.render(
+root.render(
   <React.Fragment>
-    <App />
+    <MainApp />
   </React.Fragment>,
-  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

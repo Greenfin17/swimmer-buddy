@@ -1,12 +1,15 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import signOut from '../../helpers/auth/signOut';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import signOutApp from '../../helpers/auth/signOut.js';
 
-const LogoutButton = () => {
-  const history = useHistory();
+const LogoutButton = ({
+  authInit
+}) => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    signOut().then(() => {
-      history.push('/');
+    signOutApp(authInit).then(() => {
+      navigate('/');
     });
   };
 
@@ -18,6 +21,10 @@ const LogoutButton = () => {
         onClick={handleClick}></i><br />Log Out</button>
     </div>
   );
+};
+
+LogoutButton.propTypes = {
+  authInit: PropTypes.object,
 };
 
 export default LogoutButton;
